@@ -1,0 +1,865 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: Book_Concultation
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: quant/mongo:0.0.2@39a3e2a52184e1971185d17cf714fea11c99ae2b8f45d95879f3a68b03cfe073
+kind: app
+version: 0.3.0
+workflow:
+  conversation_variables: []
+  environment_variables:
+  - description: ''
+    id: 2c7e750f-a164-4fd0-b06c-c5083c4196ea
+    name: service_account_json
+    selector:
+    - env
+    - service_account_json
+    value: "{\n  \"type\": \"service_account\",\n  \"project_id\": \"appointments-464517\"\
+      ,\n  \"private_key_id\": \"bdb7cf1f7e5c1b5a0cb36a7f618abfe83a3a11ee\",\n  \"\
+      private_key\": \"-----BEGIN PRIVATE KEY-----\\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC4JqzinzuRRLOv\\\
+      nwydkNe4Z1IbgPeGNko2ywWeAUCrYEgMl/sKDPOqTAPZL20//N5QbmirySIyIZuap\\nhB8YMFwnPzfECnLVJjmuS+BCjscUTRb1gJFpmxzUk2V0dK562lmBn8HSWKhrmg/7\\\
+      nRRdLO4kK6b/tQ1CrVACrUt2bXCLc3nZdCT55LL9VkB8hfG1p3KZt+12DU6zSlkAl\\n4UDcB/JxCqtrw84XGFt1RQDHJ4Wnj/OS4PpjroMninebvouWdxv2teTSz9+AbHq6\\\
+      nkCk89KIb+dwszZL/bXf9EV9uPVvDkifAikdTRYINpGQ3Gys40CZOSLbHchJoTEaT\\nY3X7cl+lAgMBAAECggEAS3Xxv3Xfu4ILHdmbITnmRWhtEqPY8yIcdaVCS/bN77fF\\\
+      n2YKBY7UJLM8mnmQS7nLwerUcpybqi5SbLdjJwyhCAwUpTWi4sLaWyWEnVy7Zzmxe\\nnaCfNcbNtCBoYSXVP9uM9QypqJATB/DcXqtrxbTyTeoGb2v3uRVVpt7wl5LUaGv+\\\
+      nxeZiH/W5EM8gDxDAocwcGhfzjZI6ygwAWp1gVnCskM9VPk0+INkQ+mP2uYc8lfbY\\n8bu9+LDqC/1/VqSJuafNsSRdVbvMnXBCsLpyZ00izOHZo5PHSSpLbwtRevUKOhTG\\\
+      n4Cu17wP587M/zNc9CQFU4VNJUMs3abbKf/ctMww7KwKBgQD9SGJK2CR8GOIvkNkr\\nB4YDnR0nc4QBgf0jfTIdVK9/J2Itf6HEztnlX4zFJcN6QHcKy4WxFZk0oK0VIOCm\\\
+      nP6x4hxQ54gQ51idNjZ79x+xkXSqCZTeS6jaA/ijvCRg4Ro+um6SmjXjt/WGruSvp\\nD+OOZdFYmE6lUTE1oozTCbMjQwKBgQC6IG2VudPnuFBp6axNw/VbmfcPnfKVU1ON\\\
+      n47xbJdZkxk+Ttl/jd0aFzLEWVHCo4yARrpIAPTKPSWiJdjYZ8ACadPvE5Yu+If1z\\n5bMbb3g37iu1+8DZpzRC7HIlMMraxfUCTFd1l9HquMYymPzKfv/IjQijFsrFnU1i\\\
+      n3YnHd0ie9wKBgFDuaSH7MKVKmjOSuCHMtKDA+kjZ22tT6twFLBc9MRqTLgbVyo4F\\nfpCRWHzCVVTh9mfHon90JFExqjyfFclpfSXCG89nDeyhJkvcndn/oORs9KFX0Ess\\\
+      ndaAAFnpS0J9ixJSJfTIO8H4zQZtKfuJoxlCA7kS93htq9ytpNlBUwB3bAoGAQ4hu\\nmovxYjtTGgrKFPFL/i+QIB98HEg+odYGyr+g2bHGv97FTgBCG1wYyPRcaDr4sNG5\\\
+      ncdLCnJDTGEVG/gRCA8j8bQWovZURpFKsuQCqCwkk3QP6hj6PzNSD2hCpGdYHvwy6\\nExXB+buPVl6CImsQHdFmV952NluL75pYWoJiXCMCgYEA4ObpvJ8GqDV9UaAwz6O7\\\
+      nnVoLFrb6uNWcBLN5XMREF8doXOy8RP6+rlcsaZDEGjMgpC/ux5FbjyetLZVaZvWm\\ngwarvPOPNcJzv9jXPMVjzYaA3JsKf7mqcQ4tNOGrF3qoXTPCVGMI3dZ3ffjqKfdv\\\
+      nLPGixeUH9ld/dzBaBMUdkec=\\n-----END PRIVATE KEY-----\\n\",\n  \"client_email\"\
+      : \"calendar-mail@appointments-464517.iam.gserviceaccount.com\",\n  \"client_id\"\
+      : \"110593448919107209584\",\n  \"auth_uri\": \"https://accounts.google.com/o/oauth2/auth\"\
+      ,\n  \"token_uri\": \"https://oauth2.googleapis.com/token\",\n  \"auth_provider_x509_cert_url\"\
+      : \"https://www.googleapis.com/oauth2/v1/certs\",\n  \"client_x509_cert_url\"\
+      : \"https://www.googleapis.com/robot/v1/metadata/x509/calendar-mail%40appointments-464517.iam.gserviceaccount.com\"\
+      ,\n  \"universe_domain\": \"googleapis.com\",\n   \"calendar_id\":\"7e6b1da00c66e1c5161d8f9281286202286acf534e5ddb70a7a1ad5314980057@group.calendar.google.com\"\
+      \n}"
+    value_type: string
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: tool
+      id: 1750550104646-source-1759176535370-target
+      selected: false
+      source: '1750550104646'
+      sourceHandle: source
+      target: '1759176535370'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: code
+      id: 1759176535370-source-1755215995065-target
+      selected: false
+      source: '1759176535370'
+      sourceHandle: source
+      target: '1755215995065'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: tool
+      id: 1755215995065-source-1759176620373-target
+      selected: false
+      source: '1755215995065'
+      sourceHandle: source
+      target: '1759176620373'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: tool
+        targetType: code
+      id: 1759176620373-source-1755216036465-target
+      selected: false
+      source: '1759176620373'
+      sourceHandle: source
+      target: '1755216036465'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: tool
+      id: 1755216036465-source-1759176688640-target
+      selected: false
+      source: '1755216036465'
+      sourceHandle: source
+      target: '1759176688640'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: end
+      id: 1759176688640-source-1755216449573-target
+      selected: false
+      source: '1759176688640'
+      sourceHandle: source
+      target: '1755216449573'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: Start
+        type: start
+        variables:
+        - label: Start Time
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: start_time
+        - label: End Time
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: end_time
+        - label: date
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: date
+        - label: Phone Number
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: phone_number
+        - label: medical reason
+          max_length: 4000
+          options: []
+          required: true
+          type: paragraph
+          variable: medical_reason
+        - label: patient name
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: patient_name
+        - label: patient age
+          max_length: 48
+          options: []
+          required: true
+          type: number
+          variable: patient_age
+        - label: patient city
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: patient_city
+        - label: MainHealthConcern
+          max_length: 120
+          options:
+          - Lifestyle reset
+          - Lactation and Postpartum Care
+          - Pregnancy Wellness
+          - Fertility & Pre-pregnancy
+          - Weight Management
+          - PCOS Management
+          required: true
+          type: select
+          variable: MainHealthConcern
+        - label: WhatSymptonExperiencing
+          max_length: 100
+          options:
+          - Hormonal imbalances
+          - Digestive problems
+          - Sleep issues
+          - Stress & anxiety
+          - Postpartum challenges
+          - Pregnancy planning
+          - Fertility concerns
+          - PCOS symptoms
+          - Weight management issues
+          - Irregular periods
+          required: true
+          type: select
+          variable: WhatSymptonExperiencing
+        - label: CurrentLifestyle
+          max_length: 48
+          options: []
+          required: true
+          type: paragraph
+          variable: CurrentLifestyle
+        - label: TriedProgramsBefore
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: TriedProgramsBefore
+        - label: HealthGoal
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: HealthGoal
+        - label: AppointmentType
+          max_length: 48
+          options:
+          - 1:1 Consultation
+          required: true
+          type: select
+          variable: AppointmentType
+        - label: fees
+          max_length: 48
+          options:
+          - 999 indian rupees
+          required: true
+          type: select
+          variable: fees
+      height: 454
+      id: '1750550104646'
+      position:
+        x: 47.87336330341486
+        y: 304.3141323378219
+      positionAbsolute:
+        x: 47.87336330341486
+        y: 304.3141323378219
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef _find_doctor_id(obj):\n    \"\"\"在任意嵌套的 dict/list\
+          \ 中递归查找第一个非空 doctor_id\"\"\"\n    if isinstance(obj, dict):\n        if\
+          \ \"doctor_id\" in obj and obj[\"doctor_id\"]:\n            return obj[\"\
+          doctor_id\"]\n        for v in obj.values():\n            did = _find_doctor_id(v)\n\
+          \            if did:\n                return did\n    elif isinstance(obj,\
+          \ list):\n        for item in obj:\n            did = _find_doctor_id(item)\n\
+          \            if did:\n                return did\n    return None\n\ndef\
+          \ main(doctor_details):\n    # 允许传入 str / dict / list\n    data = json.loads(doctor_details)\
+          \ if isinstance(doctor_details, str) else doctor_details\n\n    # 先直接全局搜索\n\
+          \    doctor_id = _find_doctor_id(data)\n\n    # 如果还没找到，再尝试你给出的典型路径\n   \
+          \ if not doctor_id:\n        try:\n            doctor_id = data[\"doctor_details\"\
+          ][0][\"documents\"][0][\"doctor_id\"]\n        except Exception:\n     \
+          \       pass\n\n    filter_ = {\"doctor_id\": doctor_id}\n    return {\"\
+          filter\": json.dumps(filter_)}"
+        code_language: python3
+        desc: ''
+        outputs:
+          filter:
+            children: null
+            type: string
+        selected: false
+        title: Code 4
+        type: code
+        variables:
+        - value_selector:
+          - '1759176535370'
+          - json
+          variable: doctor_details
+      height: 54
+      id: '1755215995065'
+      position:
+        x: 748.1644106605534
+        y: 304.3141323378219
+      positionAbsolute:
+        x: 748.1644106605534
+        y: 304.3141323378219
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import os\nimport json\nimport requests\nfrom datetime import datetime,\
+          \ timezone\n\ntry:\n    from zoneinfo import ZoneInfo  # Python 3.9+\nexcept\
+          \ ImportError:\n    ZoneInfo = None\n\ndef _first(src: dict, keys, default=\"\
+          \"):\n    for k in keys:\n        if k in src and src[k] not in (None, \"\
+          \"):\n            return src[k]\n    return default\n\ndef to_rfc3339(date_str,\
+          \ time_str, tz_name=\"Asia/Kolkata\"):\n    cleaned = str(time_str).strip().upper().replace(\"\
+          \ \", \"\")\n    for fmt in (\"%I%p\", \"%I:%M%p\", \"%H:%M\", \"%H\"):\n\
+          \        try:\n            from datetime import datetime as _dt\n      \
+          \      dt = _dt.strptime(f\"{date_str} {cleaned}\", f\"%Y-%m-%d {fmt}\"\
+          )\n            tz = ZoneInfo(tz_name) if ZoneInfo else timezone.utc\n  \
+          \          return dt.replace(tzinfo=tz).isoformat()\n        except ValueError:\n\
+          \            continue\n    raise ValueError(f\"Invalid time format: '{time_str}'\"\
+          )\n\ndef _find_first_key(obj, key_names):\n    if obj is None:\n       \
+          \ return None\n    if isinstance(obj, dict):\n        for k in key_names:\n\
+          \            if k in obj and obj[k] not in (None, \"\", []):\n         \
+          \       return obj[k]\n        for v in obj.values():\n            got =\
+          \ _find_first_key(v, key_names)\n            if got not in (None, \"\",\
+          \ []):\n                return got\n        return None\n    if isinstance(obj,\
+          \ list):\n        for item in obj:\n            got = _find_first_key(item,\
+          \ key_names)\n            if got not in (None, \"\", []):\n            \
+          \    return got\n        return None\n    return None\n\ndef _normalize_calendar_details(calendar_detail,\
+          \ calendar_id_input=None):\n    if isinstance(calendar_detail, str):\n \
+          \       try:\n            calendar_detail = json.loads(calendar_detail)\n\
+          \        except Exception:\n            if \"@\" in calendar_detail or \"\
+          .\" in calendar_detail:\n                return calendar_detail, \"Asia/Kolkata\"\
+          \n            return calendar_id_input or None, \"Asia/Kolkata\"\n    calendar_id\
+          \ = calendar_id_input or _find_first_key(\n        calendar_detail, [\"\
+          calendar_id\", \"calendarId\", \"email\", \"id\"]\n    )\n    tz_name =\
+          \ _find_first_key(\n        calendar_detail, [\"timezone\", \"time_zone\"\
+          , \"timeZone\", \"tz\"]\n    ) or \"Asia/Kolkata\"\n    return calendar_id,\
+          \ tz_name\n\ndef _strip_empty(d: dict):\n    return {k: v for k, v in d.items()\
+          \ if v not in (None, \"\")}\n\ndef main(**kwargs):\n    \"\"\"\n    Outputs:\n\
+          \      - message: String (给用户)\n      - event_body: String (合法 JSON 数组字符串，给\
+          \ Mongo Insert Documents 的 documents)\n    \"\"\"\n    try:\n        # Inputs\n\
+          \        phone_number = _first(kwargs, [\"phone_number\"])\n        start_time\
+          \   = _first(kwargs, [\"start_time\"])\n        end_time     = _first(kwargs,\
+          \ [\"end_time\"])\n        date         = _first(kwargs, [\"date\"])\n \
+          \       phone        = _first(kwargs, [\"phone_number\", \"phone\"])\n \
+          \       desc         = _first(kwargs, [\"description\", \"medical_reason\"\
+          , \"notes\"])\n\n        name         = _first(kwargs, [\"name\", \"patient_name\"\
+          ])\n        age          = _first(kwargs, [\"age\", \"patient_age\"])\n\
+          \        city         = _first(kwargs, [\"city\", \"patient_city\"])\n \
+          \       main_concern = _first(kwargs, [\"MainHealthConcern\", \"MainHealthCor\"\
+          ])\n        symptoms     = _first(kwargs, [\"WhatSymptonExperiencing\",\
+          \ \"WhatSymptomt\"])\n        lifestyle    = _first(kwargs, [\"CurrentLifestyle\"\
+          , \"CurrentLifestyl\"])\n        tried_before = _first(kwargs, [\"TriedProgramsBefore\"\
+          , \"TriedPrograms\"])\n        health_goal  = _first(kwargs, [\"HealthGoal\"\
+          ])\n        appt_type    = _first(kwargs, [\"AppointmentType\", \"AppointmentT\"\
+          ])\n\n        calendar_detail   = _first(kwargs, [\"calendar_detail\", \"\
+          calendar_details\"])\n        calendar_id_input = _first(kwargs, [\"calendar_id\"\
+          ])\n        fees = _first(kwargs, [\"fees\"])\n\n        if not all([start_time,\
+          \ end_time, date]):\n            raise ValueError(\"date, start_time, end_time\
+          \ are required.\")\n\n        calendar_id, tz_name = _normalize_calendar_details(calendar_detail,\
+          \ calendar_id_input)\n        if not calendar_id:\n            raise ValueError(\"\
+          calendar_id is required.\")\n\n        start_iso = to_rfc3339(date, start_time,\
+          \ tz_name)\n        end_iso   = to_rfc3339(date, end_time, tz_name)\n  \
+          \      if end_iso <= start_iso:\n            raise ValueError(\"end_time\
+          \ must be later than start_time.\")\n\n        # API config\n        base_url\
+          \ = \"https://d3sgivh2kmd3c8.cloudfront.net\"\n        api_key  = os.getenv(\"\
+          API_KEY\", \"xpectrum-ai@123\")\n        headers  = {\"X-API-Key\": api_key,\
+          \ \"Content-Type\": \"application/json\"}\n\n        # Availability\n  \
+          \      avail = requests.get(\n            f\"{base_url}/event/availability\"\
+          ,\n            headers=headers,\n            params={\"calendar_id\": calendar_id,\
+          \ \"time_min\": start_iso, \"time_max\": end_iso, \"timezone\": tz_name},\n\
+          \            timeout=15\n        )\n        avail.raise_for_status()\n \
+          \       if not avail.json().get(\"available\", False):\n            return\
+          \ {\"message\": f\"❌ Slot {start_time}-{end_time} on {date} is not available.\"\
+          , \"event_body\": \"[]\"}\n\n        # Build description (to be stored)\n\
+          \        description_text = (\n            f\"Name: {name}\\nAge: {age}\\\
+          nCity: {city}\\nPhone: {phone}\\n\"\n            f\"Main Health Concern:\
+          \ {main_concern}\\nSymptoms: {symptoms}\\n\"\n            f\"Current Lifestyle:\
+          \ {lifestyle}\\nTried Before: {tried_before}\\n\"\n            f\"Health\
+          \ Goal: {health_goal}\\nAppointment Type: {appt_type}\\nNotes: {desc}\"\n\
+          \        )\n\n        # Create event\n        payload = {\"calendar_id\"\
+          : calendar_id, \"summary\": f\"Appointment: {appt_type} with {name}\", \"\
+          start\": start_iso, \"end\": end_iso}\n        created = requests.post(f\"\
+          {base_url}/event/create\", headers=headers, json=payload, timeout=15)\n\
+          \        created.raise_for_status()\n        created = created.json()\n\n\
+          \        # One document (dict)\n        event_doc = _strip_empty({\n   \
+          \         \"calendar_id\": calendar_id,\n            \"summary\": payload[\"\
+          summary\"],\n            \"start\": start_iso,\n            \"end\": end_iso,\n\
+          \            \"event_id\": created.get(\"event_id\"),\n            \"status\"\
+          : created.get(\"status\"),\n            \"google_calendar_id\": created.get(\"\
+          google_calendar_id\"),\n            \"description\": description_text,\n\
+          \            \"phone_number\": phone_number,\n            \"payment\": \"\
+          pending\",\n            \"cancelled\": \"no\",\n            \"created_at\"\
+          : datetime.now(timezone.utc).isoformat()\n        })\n\n        # 关键：返回“合法\
+          \ JSON 数组字符串”（双引号），供 Insert Documents (String) 使用\n        event_body_str\
+          \ = json.dumps([event_doc], ensure_ascii=False)\n\n        pay_msg = f\"\
+          \ Please pay {fees} within 30 mins to confirm the final consultation.\"\
+          \ if fees else \"\"\n        return {\n            \"message\": f\"✅ Slot\
+          \ reserved from {start_time} to {end_time} on {date}.{pay_msg}\",\n    \
+          \        \"event_body\": event_body_str   # <-- String，形如 \"[{...}]\"，内部全是双引号\n\
+          \        }\n\n    except Exception as e:\n        return {\"message\": f\"\
+          ⚠️ Error: {str(e)}\", \"event_body\": \"[]\"}"
+        code_language: python3
+        desc: ''
+        outputs:
+          event_body:
+            children: null
+            type: string
+          message:
+            children: null
+            type: string
+        selected: false
+        title: Code 3
+        type: code
+        variables:
+        - value_selector:
+          - '1750550104646'
+          - start_time
+          variable: start_time
+        - value_selector:
+          - '1750550104646'
+          - end_time
+          variable: end_time
+        - value_selector:
+          - '1750550104646'
+          - date
+          variable: date
+        - value_selector:
+          - '1750550104646'
+          - phone_number
+          variable: phone_number
+        - value_selector:
+          - '1750550104646'
+          - medical_reason
+          variable: description
+        - value_selector:
+          - '1750550104646'
+          - patient_name
+          variable: name
+        - value_selector:
+          - '1750550104646'
+          - patient_age
+          variable: age
+        - value_selector:
+          - '1750550104646'
+          - patient_city
+          variable: city
+        - value_selector:
+          - '1750550104646'
+          - MainHealthConcern
+          variable: MainHealthConcern
+        - value_selector:
+          - '1750550104646'
+          - WhatSymptonExperiencing
+          variable: WhatSymptonExperiencing
+        - value_selector:
+          - '1750550104646'
+          - CurrentLifestyle
+          variable: CurrentLifestyle
+        - value_selector:
+          - '1750550104646'
+          - TriedProgramsBefore
+          variable: TriedProgramsBefore
+        - value_selector:
+          - '1750550104646'
+          - HealthGoal
+          variable: HealthGoal
+        - value_selector:
+          - '1750550104646'
+          - AppointmentType
+          variable: AppointmentType
+        - value_selector:
+          - '1759176620373'
+          - json
+          variable: calendar_details
+        - value_selector:
+          - '1750550104646'
+          - fees
+          variable: fees
+      height: 54
+      id: '1755216036465'
+      position:
+        x: 1535.64115793661
+        y: 304.3141323378219
+      positionAbsolute:
+        x: 1535.64115793661
+        y: 304.3141323378219
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1755216036465'
+          - message
+          variable: message
+        selected: false
+        title: End 2
+        type: end
+      height: 90
+      id: '1755216449573'
+      position:
+        x: 2420.2603440226635
+        y: 304.3141323378219
+      positionAbsolute:
+        x: 2420.2603440226635
+        y: 304.3141323378219
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: ''
+          form: llm
+          human_description:
+            en_US: Collection name.
+            ja_JP: Collection name.
+            pt_BR: Collection name.
+            zh_Hans: 集合名称。
+          label:
+            en_US: Collection
+            ja_JP: Collection
+            pt_BR: Collection
+            zh_Hans: Collection
+          llm_description: ''
+          max: null
+          min: null
+          name: collection
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: '{}'
+          form: llm
+          human_description:
+            en_US: Filter for the document.
+            ja_JP: Filter for the document.
+            pt_BR: Filter for the document.
+            zh_Hans: 文档过滤器。
+          label:
+            en_US: Filter
+            ja_JP: Filter
+            pt_BR: Filter
+            zh_Hans: Filter
+          llm_description: ''
+          max: null
+          min: null
+          name: filter
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: '[]'
+          form: llm
+          human_description:
+            en_US: Pipeline for the document.Takes precedence over filter if both
+              are defined.
+            ja_JP: Pipeline for the document.Takes precedence over filter if both
+              are defined.
+            pt_BR: Pipeline for the document.Takes precedence over filter if both
+              are defined.
+            zh_Hans: 文档过滤器。
+          label:
+            en_US: Pipeline
+            ja_JP: Pipeline
+            pt_BR: Pipeline
+            zh_Hans: Pipeline
+          llm_description: ''
+          max: null
+          min: null
+          name: pipeline
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        params:
+          collection: ''
+          filter: ''
+          pipeline: ''
+        provider_id: quant/mongo/mongo
+        provider_name: quant/mongo/mongo
+        provider_type: builtin
+        selected: false
+        title: Read Document
+        tool_configurations: {}
+        tool_description: Read documents from a collection
+        tool_label: Read Document
+        tool_name: read_document
+        tool_parameters:
+          collection:
+            type: mixed
+            value: doctors
+          filter:
+            type: mixed
+            value: '{"first_name":"Li"}'
+        type: tool
+      height: 54
+      id: '1759176535370'
+      position:
+        x: 351.87336330341486
+        y: 304.3141323378219
+      positionAbsolute:
+        x: 351.87336330341486
+        y: 304.3141323378219
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: ''
+          form: llm
+          human_description:
+            en_US: Collection name.
+            ja_JP: Collection name.
+            pt_BR: Collection name.
+            zh_Hans: 集合名称。
+          label:
+            en_US: Collection
+            ja_JP: Collection
+            pt_BR: Collection
+            zh_Hans: Collection
+          llm_description: ''
+          max: null
+          min: null
+          name: collection
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: '{}'
+          form: llm
+          human_description:
+            en_US: Filter for the document.
+            ja_JP: Filter for the document.
+            pt_BR: Filter for the document.
+            zh_Hans: 文档过滤器。
+          label:
+            en_US: Filter
+            ja_JP: Filter
+            pt_BR: Filter
+            zh_Hans: Filter
+          llm_description: ''
+          max: null
+          min: null
+          name: filter
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: '[]'
+          form: llm
+          human_description:
+            en_US: Pipeline for the document.Takes precedence over filter if both
+              are defined.
+            ja_JP: Pipeline for the document.Takes precedence over filter if both
+              are defined.
+            pt_BR: Pipeline for the document.Takes precedence over filter if both
+              are defined.
+            zh_Hans: 文档过滤器。
+          label:
+            en_US: Pipeline
+            ja_JP: Pipeline
+            pt_BR: Pipeline
+            zh_Hans: Pipeline
+          llm_description: ''
+          max: null
+          min: null
+          name: pipeline
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        params:
+          collection: ''
+          filter: ''
+          pipeline: ''
+        provider_id: quant/mongo/mongo
+        provider_name: quant/mongo/mongo
+        provider_type: builtin
+        selected: true
+        title: Read Document2
+        tool_configurations: {}
+        tool_description: Read documents from a collection
+        tool_label: Read Document
+        tool_name: read_document
+        tool_parameters:
+          collection:
+            type: mixed
+            value: calendars
+          filter:
+            type: mixed
+            value: '{{#1755215995065.filter#}}'
+        type: tool
+      height: 54
+      id: '1759176620373'
+      position:
+        x: 1153.7828363786887
+        y: 304.3141323378219
+      positionAbsolute:
+        x: 1153.7828363786887
+        y: 304.3141323378219
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: ''
+          form: llm
+          human_description:
+            en_US: Collection name.
+            ja_JP: Collection name.
+            pt_BR: Collection name.
+            zh_Hans: 集合名称。
+          label:
+            en_US: Collection
+            ja_JP: Collection
+            pt_BR: Collection
+            zh_Hans: Collection
+          llm_description: ''
+          max: null
+          min: null
+          name: collection
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: '[]'
+          form: llm
+          human_description:
+            en_US: Documents to insert.
+            ja_JP: Documents to insert.
+            pt_BR: Documents to insert.
+            zh_Hans: 要插入的文档。
+          label:
+            en_US: Documents
+            ja_JP: Documents
+            pt_BR: Documents
+            zh_Hans: Documents
+          llm_description: ''
+          max: null
+          min: null
+          name: documents
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        params:
+          collection: ''
+          documents: ''
+        provider_id: quant/mongo/mongo
+        provider_name: quant/mongo/mongo
+        provider_type: builtin
+        selected: false
+        title: Insert Documents
+        tool_configurations: {}
+        tool_description: Insert documents into a collection
+        tool_label: Insert Documents
+        tool_name: insert_document
+        tool_parameters:
+          collection:
+            type: mixed
+            value: Appointments
+          documents:
+            type: mixed
+            value: '{{#1755216036465.event_body#}}'
+        type: tool
+      height: 54
+      id: '1759176688640'
+      position:
+        x: 2035.2495183046813
+        y: 304.3141323378219
+      positionAbsolute:
+        x: 2035.2495183046813
+        y: 304.3141323378219
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -732.4669037179399
+      y: 254.69461299631052
+      zoom: 0.74518996772781

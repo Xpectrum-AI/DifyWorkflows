@@ -1,0 +1,743 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: cancelAppointment
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: quant/mongo:0.0.2@39a3e2a52184e1971185d17cf714fea11c99ae2b8f45d95879f3a68b03cfe073
+kind: app
+version: 0.3.0
+workflow:
+  conversation_variables: []
+  environment_variables:
+  - description: ''
+    id: 7c896500-eba7-4804-a5d1-f2331f34235c
+    name: service_account_json
+    selector:
+    - env
+    - service_account_json
+    value: "{\n  \"type\": \"service_account\",\n  \"project_id\": \"appointments-464517\"\
+      ,\n  \"private_key_id\": \"bdb7cf1f7e5c1b5a0cb36a7f618abfe83a3a11ee\",\n  \"\
+      private_key\": \"-----BEGIN PRIVATE KEY-----\\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC4JqzinzuRRLOv\\\
+      nwydkNe4Z1IbgPeGNko2ywWeAUCrYEgMl/sKDPOqTAPZL20//N5QbmirySIyIZuap\\nhB8YMFwnPzfECnLVJjmuS+BCjscUTRb1gJFpmxzUk2V0dK562lmBn8HSWKhrmg/7\\\
+      nRRdLO4kK6b/tQ1CrVACrUt2bXCLc3nZdCT55LL9VkB8hfG1p3KZt+12DU6zSlkAl\\n4UDcB/JxCqtrw84XGFt1RQDHJ4Wnj/OS4PpjroMninebvouWdxv2teTSz9+AbHq6\\\
+      nkCk89KIb+dwszZL/bXf9EV9uPVvDkifAikdTRYINpGQ3Gys40CZOSLbHchJoTEaT\\nY3X7cl+lAgMBAAECggEAS3Xxv3Xfu4ILHdmbITnmRWhtEqPY8yIcdaVCS/bN77fF\\\
+      n2YKBY7UJLM8mnmQS7nLwerUcpybqi5SbLdjJwyhCAwUpTWi4sLaWyWEnVy7Zzmxe\\nnaCfNcbNtCBoYSXVP9uM9QypqJATB/DcXqtrxbTyTeoGb2v3uRVVpt7wl5LUaGv+\\\
+      nxeZiH/W5EM8gDxDAocwcGhfzjZI6ygwAWp1gVnCskM9VPk0+INkQ+mP2uYc8lfbY\\n8bu9+LDqC/1/VqSJuafNsSRdVbvMnXBCsLpyZ00izOHZo5PHSSpLbwtRevUKOhTG\\\
+      n4Cu17wP587M/zNc9CQFU4VNJUMs3abbKf/ctMww7KwKBgQD9SGJK2CR8GOIvkNkr\\nB4YDnR0nc4QBgf0jfTIdVK9/J2Itf6HEztnlX4zFJcN6QHcKy4WxFZk0oK0VIOCm\\\
+      nP6x4hxQ54gQ51idNjZ79x+xkXSqCZTeS6jaA/ijvCRg4Ro+um6SmjXjt/WGruSvp\\nD+OOZdFYmE6lUTE1oozTCbMjQwKBgQC6IG2VudPnuFBp6axNw/VbmfcPnfKVU1ON\\\
+      n47xbJdZkxk+Ttl/jd0aFzLEWVHCo4yARrpIAPTKPSWiJdjYZ8ACadPvE5Yu+If1z\\n5bMbb3g37iu1+8DZpzRC7HIlMMraxfUCTFd1l9HquMYymPzKfv/IjQijFsrFnU1i\\\
+      n3YnHd0ie9wKBgFDuaSH7MKVKmjOSuCHMtKDA+kjZ22tT6twFLBc9MRqTLgbVyo4F\\nfpCRWHzCVVTh9mfHon90JFExqjyfFclpfSXCG89nDeyhJkvcndn/oORs9KFX0Ess\\\
+      ndaAAFnpS0J9ixJSJfTIO8H4zQZtKfuJoxlCA7kS93htq9ytpNlBUwB3bAoGAQ4hu\\nmovxYjtTGgrKFPFL/i+QIB98HEg+odYGyr+g2bHGv97FTgBCG1wYyPRcaDr4sNG5\\\
+      ncdLCnJDTGEVG/gRCA8j8bQWovZURpFKsuQCqCwkk3QP6hj6PzNSD2hCpGdYHvwy6\\nExXB+buPVl6CImsQHdFmV952NluL75pYWoJiXCMCgYEA4ObpvJ8GqDV9UaAwz6O7\\\
+      nnVoLFrb6uNWcBLN5XMREF8doXOy8RP6+rlcsaZDEGjMgpC/ux5FbjyetLZVaZvWm\\ngwarvPOPNcJzv9jXPMVjzYaA3JsKf7mqcQ4tNOGrF3qoXTPCVGMI3dZ3ffjqKfdv\\\
+      nLPGixeUH9ld/dzBaBMUdkec=\\n-----END PRIVATE KEY-----\\n\",\n  \"client_email\"\
+      : \"calendar-mail@appointments-464517.iam.gserviceaccount.com\",\n  \"client_id\"\
+      : \"110593448919107209584\",\n  \"auth_uri\": \"https://accounts.google.com/o/oauth2/auth\"\
+      ,\n  \"token_uri\": \"https://oauth2.googleapis.com/token\",\n  \"auth_provider_x509_cert_url\"\
+      : \"https://www.googleapis.com/oauth2/v1/certs\",\n  \"client_x509_cert_url\"\
+      : \"https://www.googleapis.com/robot/v1/metadata/x509/calendar-mail%40appointments-464517.iam.gserviceaccount.com\"\
+      ,\n  \"universe_domain\": \"googleapis.com\",\n   \"calendar_id\":\"7e6b1da00c66e1c5161d8f9281286202286acf534e5ddb70a7a1ad5314980057@group.calendar.google.com\"\
+      \n}"
+    value_type: string
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1750631920786-source-1755227907335-target
+      source: '1750631920786'
+      sourceHandle: source
+      target: '1755227907335'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1755227907335-true-17519383241640-target
+      source: '1755227907335'
+      sourceHandle: 'true'
+      target: '17519383241640'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: code
+      id: 1750631913187-source-1755228291557-target
+      source: '1750631913187'
+      sourceHandle: source
+      target: '1755228291557'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 1755228390408-false-1750631920786-target
+      source: '1755228390408'
+      sourceHandle: 'false'
+      target: '1750631920786'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1755228390408-true-1755228496723-target
+      source: '1755228390408'
+      sourceHandle: 'true'
+      target: '1755228496723'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: tool
+      id: 1755228291557-source-1759187227830-target
+      source: '1755228291557'
+      sourceHandle: source
+      target: '1759187227830'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: if-else
+      id: 1759187227830-source-1755228390408-target
+      source: '1759187227830'
+      sourceHandle: source
+      target: '1755228390408'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: tool
+      id: 1755227907335-false-1759188533272-target
+      source: '1755227907335'
+      sourceHandle: 'false'
+      target: '1759188533272'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: end
+      id: 1759188533272-source-1755227978633-target
+      source: '1759188533272'
+      sourceHandle: source
+      target: '1755227978633'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: Start
+        type: start
+        variables:
+        - label: Phone Number
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: phone_number
+      height: 90
+      id: '1750631913187'
+      position:
+        x: 974.2637360871979
+        y: 389.36908907393627
+      positionAbsolute:
+        x: 974.2637360871979
+        y: 389.36908907393627
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import os\nimport json\nimport requests\nimport ast  # 兼容某些 Python\
+          \ 字面量风格字符串\n\nBASE_URL = \"https://d3sgivh2kmd3c8.cloudfront.net\"\n\n#\
+          \ ---------- helpers ----------\ndef _parse_json_maybe(s):\n    \"\"\"接受\
+          \ dict/list/JSON 字符串/甚至 Python 字面量字符串，尽量还原为 Python 对象。\"\"\"\n    if isinstance(s,\
+          \ (dict, list)):\n        return s\n    if isinstance(s, str) and s.strip():\n\
+          \        # 先尝试 JSON\n        try:\n            return json.loads(s)\n  \
+          \      except Exception:\n            pass\n        # 再尝试 Python 字面量（如 \"\
+          {'a':1}\" / \"[{'a':1}]\")\n        try:\n            val = ast.literal_eval(s)\n\
+          \            if isinstance(val, (dict, list)):\n                return val\n\
+          \        except Exception:\n            pass\n    return s  # 其他情况直接返回\n\
+          \ndef _find_first_key(obj, keys):\n    \"\"\"在任意嵌套结构中，按 keys 顺序获取第一个非空值。\"\
+          \"\"\n    if obj is None:\n        return None\n    if isinstance(obj, dict):\n\
+          \        for k in keys:\n            if k in obj and obj[k] not in (None,\
+          \ \"\", []):\n                return obj[k]\n        for v in obj.values():\n\
+          \            got = _find_first_key(v, keys)\n            if got not in (None,\
+          \ \"\", []):\n                return got\n        return None\n    if isinstance(obj,\
+          \ list):\n        for it in obj:\n            got = _find_first_key(it,\
+          \ keys)\n            if got not in (None, \"\", []):\n                return\
+          \ got\n        return None\n    return None\n\ndef _find_event_dict(obj):\n\
+          \    \"\"\"\n    递归在任意嵌套结构里寻找包含 event_id 的 dict。\n    兼容: 直接 dict、list[dict]、{\"\
+          json\":[{\"documents\":[{...}]}]} 等。\n    \"\"\"\n    if obj is None:\n\
+          \        return None\n    if isinstance(obj, dict):\n        if obj.get(\"\
+          event_id\"):\n            return obj\n        # 优先在常见容器键里找\n        for\
+          \ key in (\"documents\", \"json\", \"items\", \"results\", \"data\"):\n\
+          \            sub = obj.get(key)\n            if sub is not None:\n     \
+          \           found = _find_event_dict(sub)\n                if found:\n \
+          \                   return found\n        # 再遍历所有 value\n        for v in\
+          \ obj.values():\n            found = _find_event_dict(v)\n            if\
+          \ found:\n                return found\n        return None\n    if isinstance(obj,\
+          \ list):\n        for it in obj:\n            found = _find_event_dict(it)\n\
+          \            if found:\n                return found\n        return None\n\
+          \    return None\n\n# ---------- main ----------\ndef main(event_details_str):\n\
+          \    \"\"\"\n    Inputs:\n      - event_details_str: JSON string / dict\
+          \ / list / 包裹结构，内部需含 event_id 与 calendar_id\n    Outputs:\n      - messages:\
+          \ String\n      - update  : String (Mongo Update JSON，如 {\"$set\":{\"cancelled\"\
+          :\"yes\"}}；失败或找不到则返回空字符串)\n    \"\"\"\n    try:\n        payload = _parse_json_maybe(event_details_str)\n\
+          \        event = _find_event_dict(payload)\n        if not isinstance(event,\
+          \ dict):\n            return {\"messages\": \"❌ Unable to locate event data\
+          \ in input.\", \"update\": \"\"}\n\n        event_id = _find_first_key(event,\
+          \ [\"event_id\", \"id\"])\n        if not event_id:\n            return\
+          \ {\"messages\": \"❌ Missing event_id.\", \"update\": \"\"}\n\n        calendar_id\
+          \ = _find_first_key(event, [\"calendar_id\", \"calendarId\", \"email\",\
+          \ \"id\"])\n        if not calendar_id:\n            return {\"messages\"\
+          : \"❌ Missing calendar_id.\", \"update\": \"\"}\n\n        api_key = os.getenv(\"\
+          API_KEY\", \"xpectrum-ai@123\")\n        headers = {\"X-API-Key\": api_key}\n\
+          \n        resp = requests.delete(\n            f\"{BASE_URL}/event/delete\"\
+          ,\n            headers=headers,\n            params={\"calendar_id\": calendar_id,\
+          \ \"event_id\": event_id},\n            timeout=15\n        )\n\n      \
+          \  if resp.status_code in (200, 204):\n            msg = \"✅ Appointment\
+          \ has been canceled successfully.\"\n            update_str = json.dumps({\"\
+          $set\": {\"cancelled\": \"yes\"}}, ensure_ascii=False)\n        elif resp.status_code\
+          \ in (404, 410):\n            msg = \"❌ Appointment not found or already\
+          \ canceled.\"\n            update_str = \"\"\n        else:\n          \
+          \  # 尝试读取错误详情\n            try:\n                err = resp.json()\n   \
+          \         except Exception:\n                err = resp.text\n         \
+          \   msg = f\"❌ Failed to cancel appointment. HTTP {resp.status_code}: {err}\"\
+          \n            update_str = \"\"\n\n        return {\"messages\": msg, \"\
+          update\": update_str}\n\n    except Exception as e:\n        return {\"\
+          messages\": f\"❌ Unexpected error: {e}\", \"update\": \"\"}"
+        code_language: python3
+        desc: ''
+        outputs:
+          messages:
+            children: null
+            type: string
+          update:
+            children: null
+            type: string
+        selected: false
+        title: Code
+        type: code
+        variables:
+        - value_selector:
+          - '1759187227830'
+          - json
+          variable: event_details_str
+      height: 54
+      id: '1750631920786'
+      position:
+        x: 3148.9078825105134
+        y: 408.264583175958
+      positionAbsolute:
+        x: 3148.9078825105134
+        y: 408.264583175958
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1750631920786'
+          - messages
+          variable: messages
+        selected: false
+        title: End (1)
+        type: end
+      height: 90
+      id: '17519383241640'
+      position:
+        x: 4515.390936982174
+        y: 241.0474327240343
+      positionAbsolute:
+        x: 4515.390936982174
+        y: 241.0474327240343
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: empty
+            id: 2e6a86e1-dd86-472d-9875-ee8ca28bd1a6
+            value: ''
+            varType: string
+            variable_selector:
+            - '1750631920786'
+            - update
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: IF/ELSE
+        type: if-else
+      height: 126
+      id: '1755227907335'
+      position:
+        x: 3735.8522802916987
+        y: 320.58067334586923
+      positionAbsolute:
+        x: 3735.8522802916987
+        y: 320.58067334586923
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1750631920786'
+          - messages
+          variable: messages
+        selected: false
+        title: End 2
+        type: end
+      height: 90
+      id: '1755227978633'
+      position:
+        x: 5114.712511063242
+        y: 454.2590992648008
+      positionAbsolute:
+        x: 5114.712511063242
+        y: 454.2590992648008
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\nimport re\n\ndef main(phone_number):\n    \"\"\"\n   \
+          \ Outputs:\n      - filter  : String（合法 JSON 字符串，给 Mongo Filter 使用）\n  \
+          \    - message : String（给用户看的提示）\n    \"\"\"\n\n    # normalize phone (可按需加更严格的清洗规则)\n\
+          \    phone = \"\" if phone_number is None else str(phone_number).strip()\n\
+          \    phone = re.sub(r\"\\s+\", \"\", phone)  # 去空格\n\n    if not phone:\n\
+          \        return {\n            \"filter\": \"{}\",  # 传空条件，避免解析错误\n    \
+          \        \"message\": \"Phone number is missing.\"\n        }\n\n    # Mongo\
+          \ 过滤条件：{\"phone_number\": \"...\", \"cancelled\": \"no\"}\n    filter_obj\
+          \ = {\"phone_number\": phone, \"cancelled\": \"no\"}\n\n    # 关键：只 dump\
+          \ 一次，得到合法 JSON 字符串（双引号、无尾逗号）\n    filter_json = json.dumps(filter_obj, ensure_ascii=False,\
+          \ separators=(\",\", \":\"))\n\n    return {\n        \"filter\": filter_json,\n\
+          \        \"message\": f\"We don't see any appointments exist here for the\
+          \ phone number {phone}. You either cancelled them or you did not book.\"\
+          \n    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          filter:
+            children: null
+            type: string
+          message:
+            children: null
+            type: string
+        selected: false
+        title: Code 2
+        type: code
+        variables:
+        - value_selector:
+          - '1750631913187'
+          - phone_number
+          variable: phone_number
+      height: 54
+      id: '1755228291557'
+      position:
+        x: 1552.121889757167
+        y: 389.36908907393627
+      positionAbsolute:
+        x: 1552.121889757167
+        y: 389.36908907393627
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: af94eb45-1b51-4019-b0fd-476f0ab5808f
+            value: '[]'
+            varType: string
+            variable_selector:
+            - '1759187227830'
+            - text
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: IF/ELSE 2
+        type: if-else
+      height: 126
+      id: '1755228390408'
+      position:
+        x: 2802.123623321199
+        y: 188.37856498617901
+      positionAbsolute:
+        x: 2802.123623321199
+        y: 188.37856498617901
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1755228291557'
+          - message
+          variable: message
+        selected: false
+        title: End 3
+        type: end
+      height: 90
+      id: '1755228496723'
+      position:
+        x: 3354.7586229434983
+        y: 105.93759302624892
+      positionAbsolute:
+        x: 3354.7586229434983
+        y: 105.93759302624892
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: ''
+          form: llm
+          human_description:
+            en_US: Collection name.
+            ja_JP: Collection name.
+            pt_BR: Collection name.
+            zh_Hans: 集合名称。
+          label:
+            en_US: Collection
+            ja_JP: Collection
+            pt_BR: Collection
+            zh_Hans: Collection
+          llm_description: ''
+          max: null
+          min: null
+          name: collection
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: '{}'
+          form: llm
+          human_description:
+            en_US: Filter for the document.
+            ja_JP: Filter for the document.
+            pt_BR: Filter for the document.
+            zh_Hans: 文档过滤器。
+          label:
+            en_US: Filter
+            ja_JP: Filter
+            pt_BR: Filter
+            zh_Hans: Filter
+          llm_description: ''
+          max: null
+          min: null
+          name: filter
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: '[]'
+          form: llm
+          human_description:
+            en_US: Pipeline for the document.Takes precedence over filter if both
+              are defined.
+            ja_JP: Pipeline for the document.Takes precedence over filter if both
+              are defined.
+            pt_BR: Pipeline for the document.Takes precedence over filter if both
+              are defined.
+            zh_Hans: 文档过滤器。
+          label:
+            en_US: Pipeline
+            ja_JP: Pipeline
+            pt_BR: Pipeline
+            zh_Hans: Pipeline
+          llm_description: ''
+          max: null
+          min: null
+          name: pipeline
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        params:
+          collection: ''
+          filter: ''
+          pipeline: ''
+        provider_id: quant/mongo/mongo
+        provider_name: quant/mongo/mongo
+        provider_type: builtin
+        selected: false
+        title: Read Document
+        tool_configurations: {}
+        tool_description: Read documents from a collection
+        tool_label: Read Document
+        tool_name: read_document
+        tool_parameters:
+          collection:
+            type: mixed
+            value: Appointments
+          filter:
+            type: mixed
+            value: '{{#1755228291557.filter#}}'
+        type: tool
+      height: 54
+      id: '1759187227830'
+      position:
+        x: 1985.457028446714
+        y: 389.36908907393627
+      positionAbsolute:
+        x: 1985.457028446714
+        y: 389.36908907393627
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: ''
+          form: llm
+          human_description:
+            en_US: Collection name.
+            ja_JP: Collection name.
+            pt_BR: Collection name.
+            zh_Hans: 集合名称。
+          label:
+            en_US: Collection
+            ja_JP: Collection
+            pt_BR: Collection
+            zh_Hans: Collection
+          llm_description: ''
+          max: null
+          min: null
+          name: collection
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: '{}'
+          form: llm
+          human_description:
+            en_US: Filter for the document.
+            ja_JP: Filter for the document.
+            pt_BR: Filter for the document.
+            zh_Hans: 文档过滤器。
+          label:
+            en_US: Filter
+            ja_JP: Filter
+            pt_BR: Filter
+            zh_Hans: Filter
+          llm_description: ''
+          max: null
+          min: null
+          name: filter
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: '{}'
+          form: llm
+          human_description:
+            en_US: Update for the document.
+            ja_JP: Update for the document.
+            pt_BR: Update for the document.
+            zh_Hans: 文档更新。
+          label:
+            en_US: Update
+            ja_JP: Update
+            pt_BR: Update
+            zh_Hans: Update
+          llm_description: ''
+          max: null
+          min: null
+          name: update
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: 'false'
+          form: llm
+          human_description:
+            en_US: Perform an insert if no documents match the filter.
+            ja_JP: Perform an insert if no documents match the filter.
+            pt_BR: Realiza uma inserção se nenhum documento corresponder ao filtro.
+            zh_Hans: 如果文档不存在，则执行插入。
+          label:
+            en_US: Upsert
+            ja_JP: Upsert
+            pt_BR: Upsert
+            zh_Hans: Upsert
+          llm_description: ''
+          max: null
+          min: null
+          name: upsert
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: boolean
+        params:
+          collection: ''
+          filter: ''
+          update: ''
+          upsert: ''
+        provider_id: quant/mongo/mongo
+        provider_name: quant/mongo/mongo
+        provider_type: builtin
+        selected: false
+        title: Update Document
+        tool_configurations: {}
+        tool_description: Update a document in a collection
+        tool_label: Update Document
+        tool_name: update_document
+        tool_parameters:
+          collection:
+            type: mixed
+            value: Appointments
+          filter:
+            type: mixed
+            value: '{"phone_number":"{{#1750631913187.phone_number#}}"}'
+          update:
+            type: mixed
+            value: '{{#1750631920786.update#}}'
+        type: tool
+      height: 54
+      id: '1759188533272'
+      position:
+        x: 4403.108714927819
+        y: 484.66886773785535
+      positionAbsolute:
+        x: 4403.108714927819
+        y: 484.66886773785535
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -1175.6642865809383
+      y: 383.5696249482007
+      zoom: 0.4274942116550156

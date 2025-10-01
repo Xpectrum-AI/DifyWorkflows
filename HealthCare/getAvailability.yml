@@ -1,0 +1,588 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: getAvailability
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: quant/mongo:0.0.2@39a3e2a52184e1971185d17cf714fea11c99ae2b8f45d95879f3a68b03cfe073
+kind: app
+version: 0.3.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: tool
+      id: 1750627263613-source-1759169622305-target
+      source: '1750627263613'
+      sourceHandle: source
+      target: '1759169622305'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: tool
+        targetType: code
+      id: 1759169622305-source-1759176474719-target
+      source: '1759169622305'
+      sourceHandle: source
+      target: '1759176474719'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: tool
+      id: 1759176474719-source-1759189254933-target
+      source: '1759176474719'
+      sourceHandle: source
+      target: '1759189254933'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: tool
+        targetType: code
+      id: 1759189254933-source-1750627267074-target
+      source: '1759189254933'
+      sourceHandle: source
+      target: '1750627267074'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: end
+      id: 1750627267074-source-1750627345755-target
+      source: '1750627267074'
+      sourceHandle: source
+      target: '1750627345755'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: true
+        title: Start
+        type: start
+        variables:
+        - label: Start Time
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: start_time
+        - label: End Time
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: end_time
+        - label: date
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: date
+        - label: Doctor First Name
+          max_length: 48
+          options:
+          - yash
+          - Sama
+          - Ramesh
+          - david
+          - Li
+          required: true
+          type: select
+          variable: doctor_first_name
+      height: 168
+      id: '1750627263613'
+      position:
+        x: 8.944728677683884
+        y: 314.1454848024653
+      positionAbsolute:
+        x: 8.944728677683884
+        y: 314.1454848024653
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import os\nimport json\nimport requests\nfrom datetime import datetime,\
+          \ timedelta, timezone\n\ntry:\n    from zoneinfo import ZoneInfo  # Python\
+          \ 3.9+\nexcept ImportError:\n    ZoneInfo = None\n\nBASE_URL = \"https://d3sgivh2kmd3c8.cloudfront.net\"\
+          \n\n# ---------- helpers ----------\ndef _parse_json_maybe(x):\n    if isinstance(x,\
+          \ (dict, list)):\n        return x\n    if isinstance(x, str) and x.strip():\n\
+          \        try:\n            return json.loads(x)\n        except Exception:\n\
+          \            return x\n    return {}\n\ndef _find_first_key(obj, key_names):\n\
+          \    if obj is None:\n        return None\n    if isinstance(obj, dict):\n\
+          \        for k in key_names:\n            if k in obj and obj[k] not in\
+          \ (None, \"\", []):\n                return obj[k]\n        for v in obj.values():\n\
+          \            got = _find_first_key(v, key_names)\n            if got not\
+          \ in (None, \"\", []):\n                return got\n        return None\n\
+          \    if isinstance(obj, list):\n        for it in obj:\n            got\
+          \ = _find_first_key(it, key_names)\n            if got not in (None, \"\"\
+          , []):\n                return got\n        return None\n    return None\n\
+          \ndef _normalize_calendar_details(calendar_detail, calendar_id_input=None):\n\
+          \    \"\"\"\n    支持：字符串(email/calendarId)、dict、list、\n    以及 {\"json\":[{\"\
+          documents\":[{...}]}]} 等外壳。\n    \"\"\"\n    data = _parse_json_maybe(calendar_detail)\n\
+          \    if isinstance(calendar_detail, str) and not isinstance(data, (dict,\
+          \ list)):\n        if \"@\" in calendar_detail or \".\" in calendar_detail:\n\
+          \            return calendar_detail, \"Asia/Kolkata\"\n        return calendar_id_input\
+          \ or None, \"Asia/Kolkata\"\n\n    calendar_id = calendar_id_input or _find_first_key(\n\
+          \        data, [\"calendar_id\", \"calendarId\", \"email\", \"id\"]\n  \
+          \  )\n    tz_name = _find_first_key(\n        data, [\"timezone\", \"time_zone\"\
+          , \"timeZone\", \"tz\"]\n    ) or \"Asia/Kolkata\"\n    return calendar_id,\
+          \ tz_name\n\ndef _to_dt(date_str, time_str, tz_name):\n    \"\"\"'2025-10-12'\
+          \ + '8:00AM' -> tz-aware datetime\"\"\"\n    cleaned = str(time_str).strip().upper().replace(\"\
+          \ \", \"\")\n    for fmt in (\"%I%p\", \"%I:%M%p\", \"%H:%M\", \"%H\"):\n\
+          \        try:\n            dt = datetime.strptime(f\"{date_str} {cleaned}\"\
+          , f\"%Y-%m-%d {fmt}\")\n            tz = ZoneInfo(tz_name) if ZoneInfo else\
+          \ timezone.utc\n            return dt.replace(tzinfo=tz)\n        except\
+          \ ValueError:\n            continue\n    raise ValueError(f\"Invalid time\
+          \ format: '{time_str}'\")\n\ndef _iso(dt):\n    return dt.isoformat()\n\n\
+          # ---------- main ----------\ndef main(\n    date_str=None,\n    calender_detail=None,\
+          \   # 兼容你的输入拼写\n    calendar_detail=None,\n    start_time=None,        #\
+          \ 默认 8:00AM\n    end_time=None,          # 默认 5:00PM\n    slot_minutes=30,\
+          \        # 需要的连续空档长度\n    step_minutes=10         # 探测步长（越小越精细）\n):\n  \
+          \  \"\"\"\n    Output:\n      - message: String（含可读描述 + 内嵌 slot JSON）\n\
+          \    \"\"\"\n    try:\n        if not date_str:\n            return {\"\
+          message\": \"❌ date_str is required, e.g., '2025-10-12'.\"}\n\n        #\
+          \ 解析 calendar_details\n        calendar_id, tz_name = _normalize_calendar_details(calendar_detail\
+          \ or calender_detail, None)\n        if not calendar_id:\n            return\
+          \ {\"message\": \"❌ Missing calendar_id in calendar_details.\"}\n\n    \
+          \    # 构造检测窗口\n        start_label = start_time or \"8:00AM\"\n        end_label\
+          \   = end_time   or \"5:00PM\"\n        window_start = _to_dt(date_str,\
+          \ start_label, tz_name)\n        window_end   = _to_dt(date_str, end_label,\
+          \ tz_name)\n        if window_end <= window_start:\n            return {\"\
+          message\": \"❌ end_time must be later than start_time.\"}\n\n        api_key\
+          \ = os.getenv(\"API_KEY\", \"xpectrum-ai@123\")\n        headers = {\"X-API-Key\"\
+          : api_key}\n\n        slot_delta = timedelta(minutes=int(slot_minutes or\
+          \ 30))\n        step_delta = timedelta(minutes=int(step_minutes or 10))\n\
+          \n        cur = window_start\n        found = None\n\n        # 逐段调用 /event/availability\n\
+          \        while cur + slot_delta <= window_end:\n            time_min = _iso(cur)\n\
+          \            time_max = _iso(cur + slot_delta)\n            r = requests.get(\n\
+          \                f\"{BASE_URL}/event/availability\",\n                headers=headers,\n\
+          \                params={\n                    \"calendar_id\": calendar_id,\n\
+          \                    \"time_min\": time_min,\n                    \"time_max\"\
+          : time_max,\n                    \"timezone\": tz_name\n               \
+          \ },\n                timeout=10\n            )\n            ok = False\n\
+          \            try:\n                data = r.json()\n                ok =\
+          \ (r.status_code == 200 and data.get(\"available\") is True)\n         \
+          \   except Exception:\n                data = {}\n\n            if ok:\n\
+          \                found = (cur, cur + slot_delta)\n                break\n\
+          \            cur += step_delta\n\n        if found:\n            s, e =\
+          \ found\n            slot_obj = {\n                \"available\": True,\n\
+          \                \"calendar_id\": calendar_id,\n                \"timezone\"\
+          : tz_name,\n                \"start\": _iso(s),\n                \"end\"\
+          : _iso(e)\n            }\n            human = f\"{s.strftime('%H:%M')}–{e.strftime('%H:%M')}\
+          \ ({tz_name})\"\n            msg = (\n                f\"✅ Earliest {slot_minutes}min\
+          \ slot on {date_str} within {start_label}-{end_label}: {human}. \"\n   \
+          \             f\"slot={json.dumps(slot_obj, ensure_ascii=False)}\"\n   \
+          \         )\n            return {\"message\": msg}\n        else:\n    \
+          \        slot_obj = {\n                \"available\": False,\n         \
+          \       \"calendar_id\": calendar_id,\n                \"timezone\": tz_name,\n\
+          \                \"start\": \"\",\n                \"end\": \"\"\n     \
+          \       }\n            msg = (\n                f\"❌ No {slot_minutes}min\
+          \ slot available on {date_str} within {start_label}-{end_label}. \"\n  \
+          \              f\"slot={json.dumps(slot_obj, ensure_ascii=False)}\"\n  \
+          \          )\n            return {\"message\": msg}\n\n    except Exception\
+          \ as e:\n        msg = f\"⚠️ Error while checking availability: {e}\"\n\
+          \        return {\"message\": msg}"
+        code_language: python3
+        desc: ''
+        outputs:
+          message:
+            children: null
+            type: string
+        selected: false
+        title: Code
+        type: code
+        variables:
+        - value_selector:
+          - '1750627263613'
+          - start_time
+          variable: start_time
+        - value_selector:
+          - '1750627263613'
+          - end_time
+          variable: end_time
+        - value_selector:
+          - '1750627263613'
+          - date
+          variable: date_str
+        - value_selector:
+          - '1759189254933'
+          - json
+          variable: calender_detail
+      height: 54
+      id: '1750627267074'
+      position:
+        x: 1712.7091996880756
+        y: 314.1454848024653
+      positionAbsolute:
+        x: 1712.7091996880756
+        y: 314.1454848024653
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1750627267074'
+          - message
+          variable: message
+        selected: false
+        title: End
+        type: end
+      height: 90
+      id: '1750627345755'
+      position:
+        x: 2208.251628080723
+        y: 319.13946645871715
+      positionAbsolute:
+        x: 2208.251628080723
+        y: 319.13946645871715
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: ''
+          form: llm
+          human_description:
+            en_US: Collection name.
+            ja_JP: Collection name.
+            pt_BR: Collection name.
+            zh_Hans: 集合名称。
+          label:
+            en_US: Collection
+            ja_JP: Collection
+            pt_BR: Collection
+            zh_Hans: Collection
+          llm_description: ''
+          max: null
+          min: null
+          name: collection
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: '{}'
+          form: llm
+          human_description:
+            en_US: Filter for the document.
+            ja_JP: Filter for the document.
+            pt_BR: Filter for the document.
+            zh_Hans: 文档过滤器。
+          label:
+            en_US: Filter
+            ja_JP: Filter
+            pt_BR: Filter
+            zh_Hans: Filter
+          llm_description: ''
+          max: null
+          min: null
+          name: filter
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: '[]'
+          form: llm
+          human_description:
+            en_US: Pipeline for the document.Takes precedence over filter if both
+              are defined.
+            ja_JP: Pipeline for the document.Takes precedence over filter if both
+              are defined.
+            pt_BR: Pipeline for the document.Takes precedence over filter if both
+              are defined.
+            zh_Hans: 文档过滤器。
+          label:
+            en_US: Pipeline
+            ja_JP: Pipeline
+            pt_BR: Pipeline
+            zh_Hans: Pipeline
+          llm_description: ''
+          max: null
+          min: null
+          name: pipeline
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        params:
+          collection: ''
+          filter: ''
+          pipeline: ''
+        provider_id: quant/mongo/mongo
+        provider_name: quant/mongo/mongo
+        provider_type: builtin
+        selected: false
+        title: Read Document
+        tool_configurations: {}
+        tool_description: Read documents from a collection
+        tool_label: Read Document
+        tool_name: read_document
+        tool_parameters:
+          collection:
+            type: mixed
+            value: doctors
+          filter:
+            type: mixed
+            value: '{"first_name":"{{#1750627263613.doctor_first_name#}}"}'
+        type: tool
+      height: 54
+      id: '1759169622305'
+      position:
+        x: 447.5697332293587
+        y: 314.1454848024653
+      positionAbsolute:
+        x: 447.5697332293587
+        y: 314.1454848024653
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef _find_doctor_id(obj):\n    \"\"\"在任意嵌套的 dict/list\
+          \ 中递归查找第一个非空 doctor_id\"\"\"\n    if isinstance(obj, dict):\n        if\
+          \ \"doctor_id\" in obj and obj[\"doctor_id\"]:\n            return obj[\"\
+          doctor_id\"]\n        for v in obj.values():\n            did = _find_doctor_id(v)\n\
+          \            if did:\n                return did\n    elif isinstance(obj,\
+          \ list):\n        for item in obj:\n            did = _find_doctor_id(item)\n\
+          \            if did:\n                return did\n    return None\n\ndef\
+          \ main(doctor_details):\n    # 允许传入 str / dict / list\n    data = json.loads(doctor_details)\
+          \ if isinstance(doctor_details, str) else doctor_details\n\n    # 先直接全局搜索\n\
+          \    doctor_id = _find_doctor_id(data)\n\n    # 如果还没找到，再尝试你给出的典型路径\n   \
+          \ if not doctor_id:\n        try:\n            doctor_id = data[\"doctor_details\"\
+          ][0][\"documents\"][0][\"doctor_id\"]\n        except Exception:\n     \
+          \       pass\n\n    filter_ = {\"doctor_id\": doctor_id}\n    return {\"\
+          filter\": json.dumps(filter_)}"
+        code_language: python3
+        desc: ''
+        outputs:
+          filter:
+            children: null
+            type: string
+        selected: false
+        title: Code 2
+        type: code
+        variables:
+        - value_selector:
+          - '1759169622305'
+          - json
+          variable: doctor_details
+      height: 54
+      id: '1759176474719'
+      position:
+        x: 928.7958414972363
+        y: 314.1454848024653
+      positionAbsolute:
+        x: 928.7958414972363
+        y: 314.1454848024653
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: ''
+          form: llm
+          human_description:
+            en_US: Collection name.
+            ja_JP: Collection name.
+            pt_BR: Collection name.
+            zh_Hans: 集合名称。
+          label:
+            en_US: Collection
+            ja_JP: Collection
+            pt_BR: Collection
+            zh_Hans: Collection
+          llm_description: ''
+          max: null
+          min: null
+          name: collection
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: '{}'
+          form: llm
+          human_description:
+            en_US: Filter for the document.
+            ja_JP: Filter for the document.
+            pt_BR: Filter for the document.
+            zh_Hans: 文档过滤器。
+          label:
+            en_US: Filter
+            ja_JP: Filter
+            pt_BR: Filter
+            zh_Hans: Filter
+          llm_description: ''
+          max: null
+          min: null
+          name: filter
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: '[]'
+          form: llm
+          human_description:
+            en_US: Pipeline for the document.Takes precedence over filter if both
+              are defined.
+            ja_JP: Pipeline for the document.Takes precedence over filter if both
+              are defined.
+            pt_BR: Pipeline for the document.Takes precedence over filter if both
+              are defined.
+            zh_Hans: 文档过滤器。
+          label:
+            en_US: Pipeline
+            ja_JP: Pipeline
+            pt_BR: Pipeline
+            zh_Hans: Pipeline
+          llm_description: ''
+          max: null
+          min: null
+          name: pipeline
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        params:
+          collection: ''
+          filter: ''
+          pipeline: ''
+        provider_id: quant/mongo/mongo
+        provider_name: quant/mongo/mongo
+        provider_type: builtin
+        selected: false
+        title: Read Document
+        tool_configurations: {}
+        tool_description: Read documents from a collection
+        tool_label: Read Document
+        tool_name: read_document
+        tool_parameters:
+          collection:
+            type: mixed
+            value: calendars
+          filter:
+            type: mixed
+            value: '{{#1759176474719.filter#}}'
+        type: tool
+      height: 54
+      id: '1759189254933'
+      position:
+        x: 1364.0884268330262
+        y: 314.1454848024653
+      positionAbsolute:
+        x: 1364.0884268330262
+        y: 314.1454848024653
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 260.67717996505513
+      y: 372.74424928375663
+      zoom: 0.47304883590741514
