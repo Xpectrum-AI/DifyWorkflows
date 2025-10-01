@@ -1,0 +1,331 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: Demo_Checkout
+  use_icon_as_answer_icon: false
+dependencies: []
+kind: app
+version: 0.3.0
+workflow:
+  conversation_variables: []
+  environment_variables:
+  - description: ''
+    id: f781fcb6-7036-45b2-83fd-3341844bd867
+    name: APALEO_CLIENT_SECRET
+    selector:
+    - env
+    - APALEO_CLIENT_SECRET
+    value: QxKL6ljtZVfhUhUh9sEKg2FL7Dv13j
+    value_type: secret
+  - description: ''
+    id: 78d81921-a387-4604-a4b0-da8fe4c74b91
+    name: APALEO_CLIENT_ID
+    selector:
+    - env
+    - APALEO_CLIENT_ID
+    value: IJKE-SP-MYSPOT
+    value_type: string
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: code
+      id: 1758772911049-source-1758772924842-target
+      source: '1758772911049'
+      sourceHandle: source
+      target: '1758772924842'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: code
+      id: 1758772893798-source-17587733257940-target
+      source: '1758772893798'
+      sourceHandle: source
+      target: '17587733257940'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: end
+      id: 1758772924842-source-1758774359371-target
+      source: '1758772924842'
+      sourceHandle: source
+      target: '1758774359371'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: http-request
+      id: 17587733257940-source-1758772911049-target
+      source: '17587733257940'
+      sourceHandle: source
+      target: '1758772911049'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: Start
+        type: start
+        variables:
+        - label: reservation_id
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: reservation_id
+      height: 90
+      id: '1758772893798'
+      position:
+        x: 55.22155879737352
+        y: 282
+      positionAbsolute:
+        x: 55.22155879737352
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config:
+            api_key: '{{#17587733257940.access_token#}}'
+            type: bearer
+          type: api-key
+        body:
+          data: []
+          type: none
+        desc: ''
+        headers: ''
+        method: put
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP Request
+        type: http-request
+        url: https://api.apaleo.com/booking/v1/reservation-actions/{{#1758772893798.reservation_id#}}/checkout
+        variables: []
+      height: 174
+      id: '1758772911049'
+      position:
+        x: 907.3403258910262
+        y: 282
+      positionAbsolute:
+        x: 907.3403258910262
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(body: str, status_code: int):\n    \"\"\"\n\
+          \    Build a polite message for the Checkout result.\n    Input:\n     \
+          \ - body: HTTP response body (string, may be empty on success)\n      -\
+          \ status_code: HTTP status code\n    Output:\n      - {\"message\": \"...\"\
+          }  # single field\n    \"\"\"\n    data = {}\n    if body:\n        try:\n\
+          \            data = json.loads(body) if isinstance(body, str) else body\n\
+          \        except Exception:\n            data = {\"__raw__\": body}\n\n \
+          \   if 200 <= status_code < 300:\n        rid = \"\"\n        if isinstance(data,\
+          \ dict):\n            rid = data.get(\"id\") or data.get(\"reservationId\"\
+          ) or \"\"\n        msg_lines = [\"✅ Check-out completed successfully.\"\
+          ]\n        if rid:\n            msg_lines.append(f\"(Reservation ID: {rid})\"\
+          )\n        msg_lines.append(\"Thank you for staying with us. We hope to\
+          \ see you again soon!\")\n        return {\"message\": \"\\n\".join(msg_lines)}\n\
+          \n    # Failure branch: surface useful details\n    err = \"\"\n    if isinstance(data,\
+          \ dict):\n        msgs = data.get(\"messages\") or data.get(\"validationMessages\"\
+          )\n        if isinstance(msgs, list) and msgs:\n            err = \"; \"\
+          .join(str(m) for m in msgs)\n        elif data.get(\"error_description\"\
+          ):\n            err = data[\"error_description\"]\n        elif data.get(\"\
+          title\"):\n            err = data[\"title\"]\n        elif data.get(\"error\"\
+          ):\n            err = data[\"error\"]\n        elif data.get(\"__raw__\"\
+          ):\n            err = data[\"__raw__\"]\n        else:\n            err\
+          \ = json.dumps(data)[:300]\n    else:\n        err = (body or \"\")[:300]\n\
+          \n    return {\n        \"message\": (\n            f\"❌ Unfortunately,\
+          \ the check-out could not be completed (HTTP {status_code}).\\n\"\n    \
+          \        f\"Details: {err}\\n\"\n            \"Please verify the reservation\
+          \ status (e.g., the guest is currently in-house), \"\n            \"ensure\
+          \ the room/unit is assigned, and confirm the token scopes, then try again.\"\
+          \n        )\n    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          message:
+            children: null
+            type: string
+        selected: true
+        title: Code 3
+        type: code
+        variables:
+        - value_selector:
+          - '1758772911049'
+          - body
+          variable: body
+        - value_selector:
+          - '1758772911049'
+          - status_code
+          variable: status_code
+      height: 54
+      id: '1758772924842'
+      position:
+        x: 1295.9999999999998
+        y: 282
+      positionAbsolute:
+        x: 1295.9999999999998
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import requests\nimport base64\n\ndef main(client_id: str, client_secret:\
+          \ str, scope: str = \"\"):\n    \"\"\"\n    Args:\n        client_id: Apaleo\
+          \ Client ID （你要传入的 id）\n        client_secret: Apaleo Client Secret （你要传入的\
+          \ secret）\n        scope: 可选，建议传与你 App 权限一致的 scopes，用空格分隔\n            \
+          \   例: \"inventory.read booking.read reservations.read reservations.write\
+          \ booking.write\"\n    Returns:\n        {\n          \"access_token\":\
+          \ \"<token or empty>\",\n          \"http_status\": <int>,\n          \"\
+          error\": \"<error code if any>\",\n          \"error_description\": \"<human\
+          \ readable if any>\",\n          \"raw\": \"<first 500 chars of body>\"\n\
+          \        }\n    \"\"\"\n    url = \"https://identity.apaleo.com/connect/token\"\
+          \n\n    # Basic Auth: base64(id:secret)\n    raw = f\"{client_id.strip()}:{client_secret.strip()}\"\
+          .encode(\"utf-8\")\n    b64 = base64.b64encode(raw).decode(\"utf-8\")\n\n\
+          \    headers = {\n        \"Content-Type\": \"application/x-www-form-urlencoded\"\
+          ,\n        \"Authorization\": f\"Basic {b64}\",\n    }\n\n    data = {\"\
+          grant_type\": \"client_credentials\"}\n    if scope and scope.strip():\n\
+          \        data[\"scope\"] = scope.strip()\n\n    try:\n        resp = requests.post(url,\
+          \ headers=headers, data=data, timeout=20)\n    except Exception as e:\n\
+          \        return {\n            \"access_token\": \"\",\n            \"http_status\"\
+          : 0,\n            \"error\": \"request_exception\",\n            \"error_description\"\
+          : str(e),\n            \"raw\": \"\"\n        }\n\n    text = resp.text\
+          \ or \"\"\n    # 尝试 JSON 解析\n    try:\n        body = resp.json()\n    except\
+          \ Exception:\n        body = {}\n\n    token = body.get(\"access_token\"\
+          , \"\") if isinstance(body, dict) else \"\"\n    error = body.get(\"error\"\
+          , \"\") if isinstance(body, dict) else \"\"\n    error_desc = body.get(\"\
+          error_description\", \"\") if isinstance(body, dict) else \"\"\n\n    #\
+          \ 只要成功返回就给 token；否则把错误信息带上\n    return {\n        \"access_token\": token\n\
+          \    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          access_token:
+            children: null
+            type: string
+        selected: false
+        title: GetToken
+        type: code
+        variables:
+        - value_selector:
+          - env
+          - APALEO_CLIENT_SECRET
+          variable: client_secret
+        - value_selector:
+          - env
+          - APALEO_CLIENT_ID
+          variable: client_id
+      height: 54
+      id: '17587733257940'
+      position:
+        x: 456.1451400874565
+        y: 282
+      positionAbsolute:
+        x: 456.1451400874565
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1758772924842'
+          - message
+          variable: message
+        selected: false
+        title: End
+        type: end
+      height: 90
+      id: '1758774359371'
+      position:
+        x: 1600
+        y: 282
+      positionAbsolute:
+        x: 1600
+        y: 282
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -248.9507651437575
+      y: 438.63652717653383
+      zoom: 0.4842919658209974
