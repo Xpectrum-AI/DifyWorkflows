@@ -1,0 +1,612 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: Demo_MaintenanceLog
+  use_icon_as_answer_icon: false
+dependencies: []
+kind: app
+version: 0.3.0
+workflow:
+  conversation_variables: []
+  environment_variables:
+  - description: ''
+    id: f781fcb6-7036-45b2-83fd-3341844bd867
+    name: APALEO_CLIENT_SECRET
+    selector:
+    - env
+    - APALEO_CLIENT_SECRET
+    value: QxKL6ljtZVfhUhUh9sEKg2FL7Dv13j
+    value_type: secret
+  - description: ''
+    id: 78d81921-a387-4604-a4b0-da8fe4c74b91
+    name: APALEO_CLIENT_ID
+    selector:
+    - env
+    - APALEO_CLIENT_ID
+    value: IJKE-SP-MYSPOT
+    value_type: string
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: code
+      id: 1758772893798-source-17587733257940-target
+      source: '1758772893798'
+      sourceHandle: source
+      target: '17587733257940'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: http-request
+      id: 17587733257940-source-1759077092927-target
+      source: '17587733257940'
+      sourceHandle: source
+      target: '1759077092927'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: http-request
+        targetType: code
+      id: 1759077092927-source-1758776454532-target
+      source: '1759077092927'
+      sourceHandle: source
+      target: '1758776454532'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1758776454532-source-1759077698659-target
+      source: '1758776454532'
+      sourceHandle: source
+      target: '1759077698659'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1759077698659-false-1758774359371-target
+      source: '1759077698659'
+      sourceHandle: 'false'
+      target: '1758774359371'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 1759077698659-true-1759077722745-target
+      source: '1759077698659'
+      sourceHandle: 'true'
+      target: '1759077722745'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: tool
+      id: 1759077722745-source-1759077899653-target
+      source: '1759077722745'
+      sourceHandle: source
+      target: '1759077899653'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: tool
+        targetType: end
+      id: 1759077899653-source-1759077986114-target
+      source: '1759077899653'
+      sourceHandle: source
+      target: '1759077986114'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: Start
+        type: start
+        variables:
+        - label: reservation_id
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: reservation_id
+        - label: description
+          max_length: 100
+          options: []
+          required: true
+          type: text-input
+          variable: description
+        - label: unit_id
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: unit_id
+        - label: property_id
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: property_id
+        - label: date
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: date
+      height: 194
+      id: '1758772893798'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import requests\nimport base64\n\ndef main(client_id: str, client_secret:\
+          \ str, scope: str = \"\"):\n    \"\"\"\n    Args:\n        client_id: Apaleo\
+          \ Client ID （你要传入的 id）\n        client_secret: Apaleo Client Secret （你要传入的\
+          \ secret）\n        scope: 可选，建议传与你 App 权限一致的 scopes，用空格分隔\n            \
+          \   例: \"inventory.read booking.read reservations.read reservations.write\
+          \ booking.write\"\n    Returns:\n        {\n          \"access_token\":\
+          \ \"<token or empty>\",\n          \"http_status\": <int>,\n          \"\
+          error\": \"<error code if any>\",\n          \"error_description\": \"<human\
+          \ readable if any>\",\n          \"raw\": \"<first 500 chars of body>\"\n\
+          \        }\n    \"\"\"\n    url = \"https://identity.apaleo.com/connect/token\"\
+          \n\n    # Basic Auth: base64(id:secret)\n    raw = f\"{client_id.strip()}:{client_secret.strip()}\"\
+          .encode(\"utf-8\")\n    b64 = base64.b64encode(raw).decode(\"utf-8\")\n\n\
+          \    headers = {\n        \"Content-Type\": \"application/x-www-form-urlencoded\"\
+          ,\n        \"Authorization\": f\"Basic {b64}\",\n    }\n\n    data = {\"\
+          grant_type\": \"client_credentials\"}\n    if scope and scope.strip():\n\
+          \        data[\"scope\"] = scope.strip()\n\n    try:\n        resp = requests.post(url,\
+          \ headers=headers, data=data, timeout=20)\n    except Exception as e:\n\
+          \        return {\n            \"access_token\": \"\",\n            \"http_status\"\
+          : 0,\n            \"error\": \"request_exception\",\n            \"error_description\"\
+          : str(e),\n            \"raw\": \"\"\n        }\n\n    text = resp.text\
+          \ or \"\"\n    # 尝试 JSON 解析\n    try:\n        body = resp.json()\n    except\
+          \ Exception:\n        body = {}\n\n    token = body.get(\"access_token\"\
+          , \"\") if isinstance(body, dict) else \"\"\n    error = body.get(\"error\"\
+          , \"\") if isinstance(body, dict) else \"\"\n    error_desc = body.get(\"\
+          error_description\", \"\") if isinstance(body, dict) else \"\"\n\n    #\
+          \ 只要成功返回就给 token；否则把错误信息带上\n    return {\n        \"access_token\": token\n\
+          \    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          access_token:
+            children: null
+            type: string
+        selected: false
+        title: GetToken
+        type: code
+        variables:
+        - value_selector:
+          - env
+          - APALEO_CLIENT_SECRET
+          variable: client_secret
+        - value_selector:
+          - env
+          - APALEO_CLIENT_ID
+          variable: client_id
+      height: 54
+      id: '17587733257940'
+      position:
+        x: 402.45851748176574
+        y: 282
+      positionAbsolute:
+        x: 402.45851748176574
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1758776454532'
+          - flag
+          variable: message
+        selected: false
+        title: End
+        type: end
+      height: 90
+      id: '1758774359371'
+      position:
+        x: 2005.9022105794252
+        y: 368.7245442091928
+      positionAbsolute:
+        x: 2005.9022105794252
+        y: 368.7245442091928
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(body: str, status_code: int):\n    \"\"\"\n\
+          \    Input:\n      body: string from GET /booking/v1/reservations/{id}\n\
+          \      status_code: HTTP status code\n    Output:\n      {\"flag\": \"true\"\
+          |\"false\"}\n    \"\"\"\n    if not (200 <= status_code < 300):\n      \
+          \  # If reservation not found or error, default to false\n        return\
+          \ {\"flag\": \"false\"}\n\n    try:\n        data = json.loads(body) if\
+          \ isinstance(body, str) else body\n    except Exception:\n        return\
+          \ {\"flag\": \"false\"}\n\n    status = (data.get(\"status\") or \"\").strip().lower()\n\
+          \    if status in (\"checkedin\", \"inhouse\"):\n        return {\"flag\"\
+          : \"true\"}\n    else:\n        return {\"flag\": \"false\"}\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          flag:
+            children: null
+            type: string
+        selected: false
+        title: Code 3
+        type: code
+        variables:
+        - value_selector:
+          - '1759077092927'
+          - body
+          variable: body
+        - value_selector:
+          - '1759077092927'
+          - status_code
+          variable: status_code
+      height: 54
+      id: '1758776454532'
+      position:
+        x: 1180.8313696555676
+        y: 282
+      positionAbsolute:
+        x: 1180.8313696555676
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config:
+            api_key: '{{#17587733257940.access_token#}}'
+            type: bearer
+          type: api-key
+        body:
+          data: []
+          type: none
+        desc: ''
+        headers: ''
+        method: get
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP Request
+        type: http-request
+        url: https://api.apaleo.com/booking/v1/reservations/{{#1758772893798.reservation_id#}}
+        variables: []
+      height: 158
+      id: '1759077092927'
+      position:
+        x: 706.4585174817657
+        y: 282
+      positionAbsolute:
+        x: 706.4585174817657
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: ce0c7522-ec23-4d9e-87c9-3ae491990b62
+            value: 'true'
+            varType: string
+            variable_selector:
+            - '1758776454532'
+            - flag
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: IF/ELSE
+        type: if-else
+      height: 126
+      id: '1759077698659'
+      position:
+        x: 1569.6207839649792
+        y: 282
+      positionAbsolute:
+        x: 1569.6207839649792
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\nfrom datetime import datetime\n\ndef main(description:\
+          \ str, unit_id: str, property_id: str, date: str):\n    \"\"\"\n    Input:\n\
+          \      description: String\n      unit_id: String\n      property_id: String\n\
+          \      date: String (ISO8601 or YYYY-MM-DD)\n    Output:\n      {\n    \
+          \    \"update\": {...},   # Document for MongoDB\n        \"message\": \"\
+          ...\"   # Customer-facing message\n      }\n    \"\"\"\n\n    # Try to normalize\
+          \ the input date\n    try:\n        parsed_date = datetime.fromisoformat(date)\n\
+          \        iso_date = parsed_date.isoformat()\n    except Exception:\n   \
+          \     iso_date = date  # keep raw if parsing fails\n\n    # Add created_at\
+          \ as current timestamp\n    created_at = datetime.utcnow().isoformat() +\
+          \ \"Z\"\n\n    update_doc = {\n        \"description\": description,\n \
+          \       \"unit_id\": unit_id,\n        \"property_id\": property_id,\n \
+          \       \"date\": iso_date,\n        \"created_at\": created_at\n    }\n\
+          \n    # Friendly message to customer\n    message = (\n        \"Thank you\
+          \ for letting us know. \"\n        \"Your maintenance issue has been recorded,\
+          \ and our staff will contact you shortly \"\n        \"to resolve the problem\
+          \ as quickly as possible.\"\n    )\n\n    return {\"update\": update_doc,\
+          \ \"message\": message}"
+        code_language: python3
+        desc: ''
+        outputs:
+          message:
+            children: null
+            type: string
+          update:
+            children: null
+            type: object
+        selected: false
+        title: Code 3
+        type: code
+        variables:
+        - value_selector:
+          - '1758772893798'
+          - description
+          variable: description
+        - value_selector:
+          - '1758772893798'
+          - unit_id
+          variable: unit_id
+        - value_selector:
+          - '1758772893798'
+          - property_id
+          variable: property_id
+        - value_selector:
+          - '1758772893798'
+          - date
+          variable: date
+      height: 54
+      id: '1759077722745'
+      position:
+        x: 1987.3183796774556
+        y: 216.90221057942557
+      positionAbsolute:
+        x: 1987.3183796774556
+        y: 216.90221057942557
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: ''
+          form: llm
+          human_description:
+            en_US: The name of the MongoDB database.
+            ja_JP: The name of the MongoDB database.
+            pt_BR: O nome do banco de dados MongoDB.
+            zh_Hans: MongoDB 数据库的名称。
+          label:
+            en_US: Database Name
+            ja_JP: Database Name
+            pt_BR: Nome do Banco de Dados
+            zh_Hans: Database Name
+          llm_description: null
+          max: null
+          min: null
+          name: db_name
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: ''
+          form: llm
+          human_description:
+            en_US: Collection name.
+            ja_JP: Collection name.
+            pt_BR: Collection name.
+            zh_Hans: 集合名称。
+          label:
+            en_US: Collection
+            ja_JP: Collection
+            pt_BR: Collection
+            zh_Hans: Collection
+          llm_description: null
+          max: null
+          min: null
+          name: collection
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: '[]'
+          form: llm
+          human_description:
+            en_US: Documents to insert.
+            ja_JP: Documents to insert.
+            pt_BR: Documents to insert.
+            zh_Hans: 要插入的文档。
+          label:
+            en_US: Documents
+            ja_JP: Documents
+            pt_BR: Documents
+            zh_Hans: Documents
+          llm_description: null
+          max: null
+          min: null
+          name: documents
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        params:
+          collection: ''
+          db_name: ''
+          documents: ''
+        provider_id: mongo
+        provider_name: mongo
+        provider_type: builtin
+        selected: false
+        title: Mongo Insert Document
+        tool_configurations: {}
+        tool_description: A tool for inserting documents into a collection.
+        tool_label: Mongo Insert Document
+        tool_name: insert
+        tool_parameters:
+          collection:
+            type: mixed
+            value: Maintenance
+          db_name:
+            type: mixed
+            value: Hotels
+          documents:
+            type: mixed
+            value: '{{#1759077722745.update#}}'
+        type: tool
+      height: 54
+      id: '1759077899653'
+      position:
+        x: 2291.3183796774556
+        y: 216.90221057942557
+      positionAbsolute:
+        x: 2291.3183796774556
+        y: 216.90221057942557
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1759077722745'
+          - message
+          variable: message
+        selected: false
+        title: End 2
+        type: end
+      height: 90
+      id: '1759077986114'
+      position:
+        x: 2595.3183796774556
+        y: 216.90221057942557
+      positionAbsolute:
+        x: 2595.3183796774556
+        y: 216.90221057942557
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -985.9754598555226
+      y: 437.1628635856252
+      zoom: 0.4842919658209974
